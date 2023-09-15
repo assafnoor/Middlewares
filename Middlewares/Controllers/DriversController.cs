@@ -8,7 +8,6 @@ namespace Middlewares.Controllers
     [ApiController]
     [ApiConventionType(typeof(DefaultApiConventions))]
     [MyActionFilter("DriversController")]
-    
     public class DriversController : ControllerBase
     {
         private static List<string> drivers= new List<string>()
@@ -32,5 +31,6 @@ namespace Middlewares.Controllers
         {
             return Ok(drivers);
         }
+      
     }
 }
