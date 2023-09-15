@@ -6,7 +6,9 @@ namespace Middlewares.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     [MyActionFilter("DriversController")]
+    
     public class DriversController : ControllerBase
     {
         private static List<string> drivers= new List<string>()
@@ -16,8 +18,9 @@ namespace Middlewares.Controllers
             "assaf"
         };
         [HttpGet(Name ="Get")]
-        public IActionResult Get()
+        public ActionResult<List<string>> Get()
         {
+            if (drivers is null) return NotFound();
             return Ok(drivers);
         }
 
@@ -27,7 +30,6 @@ namespace Middlewares.Controllers
         [MySecondAsyncActionFilter("DriversController-Add Action Async 2")]
         public IActionResult add( string driver)
         {
-            drivers.Add(driver);
             return Ok(drivers);
         }
     }
